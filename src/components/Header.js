@@ -6,10 +6,12 @@ const StyledHeader = styled.nav`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 0 2rem;
 `;
 
 const StyledNavLink = styled(NavLink)`
     text-decoration: none;
+    padding: 2rem 1rem;
 `;
 
 const CountryButton = styled.button`
@@ -17,6 +19,7 @@ const CountryButton = styled.button`
     border: none;
     outline: none;
     cursor: pointer;
+    padding: 2rem 1rem;
 `;
 
 const Header = () => {
