@@ -1,10 +1,36 @@
 import React from "react";
-import { useTranslation } from 'react-i18next';
+import { HashRouter as Router, Switch, Route } from "react-router-dom";
+import styled from "styled-components";
+
+import Header from './components/Header';
+import TopNews from "./components/TopNews";
+import Categories from "./components/Categories";
+import Search from "./components/Search";
+
+const Layout = styled.div`
+    display: grid;
+    grid-template-rows: auto 1fr;
+`;
 
 function App() {
-    const { t, i18n } = useTranslation();
+
     return (
-        <div>{t('News App')}</div>
+        <Router>
+            <Layout>
+                <Header />
+                <Switch>
+                    <Route path="/search">
+                        <Search />
+                    </Route>
+                    <Route path="/categories">
+                        <Categories />
+                    </Route>
+                    <Route path="/">
+                        <TopNews />
+                    </Route>
+                </Switch>
+            </Layout>
+        </Router>
     );
 }
 
