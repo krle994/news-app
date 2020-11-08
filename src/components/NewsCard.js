@@ -23,7 +23,7 @@ const StyledTitle = styled.h2`
 
 const StyledDescription = styled.p`
     margin: 0;
-    padding: 1rem;
+    padding: 0 1rem 0;
     font-size: ${props => props.theme.fontSize.small}
 `;
 

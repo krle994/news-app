@@ -3,9 +3,9 @@ import { HashRouter as Router, Switch, Route } from "react-router-dom";
 import styled from "styled-components";
 
 import Header from './components/Header';
-import TopNews from "./components/TopNews";
-import Categories from "./components/Categories";
-import Search from "./components/Search";
+import TopNews from "./pages/TopNews";
+import Categories from "./pages/Categories";
+import Search from "./pages/Search";
 
 const Layout = styled.div`
     display: grid;

@@ -6,7 +6,7 @@ import { ThemeProvider } from "styled-components";
 import "./index.css";
 import theme from './theme/theme';
 import App from "./App";
-import store from "./redux/store";
+import store from "./store";
 
 import './i18n';
 

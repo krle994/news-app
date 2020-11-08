@@ -1,14 +1,14 @@
 import axios from "../config/axios";
 
-async function getTopNews(country = 'gb') {
+async function fetchArticles(code = 'gb') {
     const res = await axios.get("/top-headlines", {
         params: {
-            country,
+            country: code,
         },
     });
     return res.data;
 }
 
 export default {
-    getTopNews,
+    fetchArticles,
 };
