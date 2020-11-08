@@ -1,6 +1,9 @@
 export default {
     colors: {
-        main: "#ffffff",
+        main: "#5D2BFF",
+        bg: "#F4F5F7",
+        text: "#8E8E8E",
+        title: "#373737",
     },
     fontSize: {
         xlarge: "70px",

@@ -5,23 +5,29 @@ import { NavLink } from "react-router-dom";
 
 import { setSelectedCountry } from '../store/actions/country';
 
+import Button from './Button';
+
 const StyledHeader = styled.nav`
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 2rem;
+    border-radius: 0 0 40px 40px;
+    box-shadow: 0px -2px 10px 0px ${(props) => props.theme.colors.text};
 `;
 
 const StyledNavLink = styled(NavLink)`
     text-decoration: none;
     padding: 2rem 1rem;
+    color: ${(props) => props.theme.colors.text};
+    transition: color .3s ease;
+    &.active,
+    &:hover {
+        color: ${(props) => props.theme.colors.main};
+    } 
 `;
 
-const CountryButton = styled.button`
-    background: none;
-    border: none;
-    outline: none;
-    cursor: pointer;
+const CountryButton = styled(Button)`
     padding: 2rem 1rem;
 `;
 

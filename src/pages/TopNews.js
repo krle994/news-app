@@ -11,11 +11,12 @@ import { getArticles } from "../store/actions/news";
 
 const TopNewsWrapper = styled.div`
     display: grid;
-    grid-gap: 1rem;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
 `;
 
 const StyledTitle = styled.h2`
+    color: ${(props) => props.theme.colors.title};
     font-size: ${(props) => props.theme.fontSize.large};
 `;
 
