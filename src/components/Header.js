@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import { useSelector, useDispatch } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 
-import { setSelectedCountry } from '../store/actions/country';
+import { setSelectedCountry } from "../store/actions/country";
 
-import Button from './Button';
+import Button from "./Button";
 
 const StyledHeader = styled.nav`
     display: flex;
@@ -20,11 +20,11 @@ const StyledNavLink = styled(NavLink)`
     text-decoration: none;
     padding: 2rem 1rem;
     color: ${(props) => props.theme.colors.text};
-    transition: color .3s ease;
+    transition: color 0.3s ease;
     &.active,
     &:hover {
         color: ${(props) => props.theme.colors.main};
-    } 
+    }
 `;
 
 const CountryButton = styled(Button)`
@@ -32,20 +32,28 @@ const CountryButton = styled(Button)`
 `;
 
 const Header = () => {
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
     const dispatch = useDispatch();
     const selectedCountry = useSelector(
         (state) => state.country.selectedCountry
     );
     const countries = useSelector((state) => state.country.countries);
+    const location = useLocation();
+    const isArticlePage = location.pathname === "/news";
 
     const getActiveClass = (code) => {
-        return selectedCountry && selectedCountry.code === code ? "active" : "";
+        return isArticlePage
+            ? "disabled"
+            : selectedCountry.code === code
+            ? "active"
+            : "";
     };
 
     const handleCountryChange = (country) => {
-        dispatch(setSelectedCountry(country));
-    }
+        if (!isArticlePage) {
+            dispatch(setSelectedCountry(country));
+        }
+    };
 
     return (
         <StyledHeader>

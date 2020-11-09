@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-import fallbackSrc from "../assets/images/placeholder.png";
-
-import Button from './Button';
+import Button from "./Button";
+import Paragraph from "./Typography/Paragraph";
+import Image from "./Image";
 
 const StyledNewsCard = styled.div`
     display: flex;
@@ -10,7 +10,7 @@ const StyledNewsCard = styled.div`
     width: 100%;
     background: white;
     border-radius: 8px;
-    transition: box-shadow .3s ease;
+    transition: box-shadow 0.3s ease;
     box-shadow: 0px 2px 2px rgba(211, 214, 215, 0.2),
         0px 4px 4px rgba(211, 214, 215, 0.2),
         0px 16px 16px rgba(211, 214, 215, 0.2),
@@ -25,7 +25,7 @@ const StyledNewsCard = styled.div`
     }
 `;
 
-const Styledimage = styled.img`
+const Styledimage = styled(Image)`
     width: 100%;
     height: 200px;
     object-fit: cover;
@@ -39,12 +39,8 @@ const StyledTitle = styled.h2`
     font-size: ${(props) => props.theme.fontSize.regular};
 `;
 
-const StyledDescription = styled.p`
+const StyledDescription = styled(Paragraph)`
     flex: 1;
-    margin: 0;
-    padding: 0 1rem 1rem;
-    color: ${(props) => props.theme.colors.text};
-    font-size: ${(props) => props.theme.fontSize.small};
 `;
 
 const StyledFooter = styled.div`
@@ -52,25 +48,28 @@ const StyledFooter = styled.div`
     text-align: right;
 `;
 
-const MoreButton = styled(Button)`
+const MoreLink = styled(Button)`
     font-size: ${(props) => props.theme.fontSize.small};
 `;
 
-const NewsCard = ({ title, imgSrc, description }) => {
-    const onError = (e) => {
-        e.target.onerror = null;
-        e.target.src = fallbackSrc;
-    };
-
-    if (!imgSrc) imgSrc = fallbackSrc;
+const NewsCard = ({ title, imgSrc, description, content, timestamp }) => {
+    const id = Date.parse(timestamp);
 
     return (
         <StyledNewsCard>
-            <Styledimage src={imgSrc} onError={onError} alt={description} />
+            <Styledimage src={imgSrc} alt={description} />
             <StyledTitle>{title}</StyledTitle>
             <StyledDescription>{description}</StyledDescription>
             <StyledFooter>
-                <MoreButton>More &gt;</MoreButton>
+                <MoreLink
+                    link="true"
+                    to={{
+                        pathname: "/news",
+                        state: { title, imgSrc, content },
+                    }}
+                >
+                    More &gt;
+                </MoreLink>
             </StyledFooter>
         </StyledNewsCard>
     );

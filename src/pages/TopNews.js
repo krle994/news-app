@@ -6,6 +6,7 @@ import { v4 as uuid } from "uuid";
 
 import Container from "../components/Container";
 import NewsCard from "../components/NewsCard";
+import Title from "../components/Typography/Title";
 
 import { getArticles } from "../store/actions/news";
 
@@ -15,20 +16,15 @@ const TopNewsWrapper = styled.div`
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
 `;
 
-const StyledTitle = styled.h2`
-    color: ${(props) => props.theme.colors.title};
-    font-size: ${(props) => props.theme.fontSize.large};
-`;
-
 const TopNews = () => {
     const country = useSelector((state) => state.country.selectedCountry.name);
     const articles = useSelector((state) => state.news.articles);
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(getArticles());
-    }, []);
+    }, [country]);
 
     const renderArticles = () => {
         if (articles.length) {
@@ -38,6 +34,7 @@ const TopNews = () => {
                     title={article.title}
                     imgSrc={article.urlToImage}
                     description={article.description}
+                    content={article.content}
                 />
             ));
         }
@@ -45,9 +42,9 @@ const TopNews = () => {
 
     return (
         <Container>
-            <StyledTitle>
+            <Title>
                 {t("topNewsTitle")} {country}
-            </StyledTitle>
+            </Title>
             <TopNewsWrapper>{renderArticles()}</TopNewsWrapper>
         </Container>
     );

@@ -3,9 +3,11 @@ import { HashRouter as Router, Switch, Route } from "react-router-dom";
 import styled from "styled-components";
 
 import Header from './components/Header';
+
 import TopNews from "./pages/TopNews";
 import Categories from "./pages/Categories";
 import Search from "./pages/Search";
+import Article from "./pages/Article";
 
 const Layout = styled.div`
     display: grid;
@@ -24,6 +26,9 @@ function App() {
                     </Route>
                     <Route path="/categories">
                         <Categories />
+                    </Route>
+                    <Route path="/news">
+                        <Article />
                     </Route>
                     <Route exact path="/">
                         <TopNews />
