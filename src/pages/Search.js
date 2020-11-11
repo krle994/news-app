@@ -1,9 +1,7 @@
 import Container from '../components/Container';
 
-const Search = () => {
+export default () => {
     return (
         <Container>Search</Container>
     );
 }
- 
-export default Search;

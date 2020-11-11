@@ -10,5 +10,6 @@ export default {
         large: "40px",
         regular: "20px",
         small: "14px",
+        xsmall: "12px",
     },
 };

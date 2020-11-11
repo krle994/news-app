@@ -3,31 +3,20 @@ import styled from "styled-components";
 import Button from "./Button";
 import Paragraph from "./Typography/Paragraph";
 import Image from "./Image";
+import Arrow from "./Arrow";
 
 const StyledNewsCard = styled.div`
     display: flex;
     flex-direction: column;
     width: 100%;
+    height: 100%;
     background: white;
     border-radius: 8px;
-    transition: box-shadow 0.3s ease;
-    box-shadow: 0px 2px 2px rgba(211, 214, 215, 0.2),
-        0px 4px 4px rgba(211, 214, 215, 0.2),
-        0px 16px 16px rgba(211, 214, 215, 0.2),
-        0px 32px 32px rgba(211, 214, 215, 0.2),
-        0px 64px 64px rgba(211, 214, 215, 0.2);
-    &:hover {
-        box-shadow: 0px 2px 2px rgba(211, 214, 215, 0.5),
-            0px 4px 4px rgba(211, 214, 215, 0.5),
-            0px 16px 16px rgba(211, 214, 215, 0.5),
-            0px 32px 32px rgba(211, 214, 215, 0.5),
-            0px 64px 64px rgba(211, 214, 215, 0.5);
-    }
 `;
 
-const Styledimage = styled(Image)`
+const StyledImage = styled(Image)`
     width: 100%;
-    height: 200px;
+    height: ${(props) => (props.small ? "100px" : "200px")};
     object-fit: cover;
     border-radius: 8px 8px 0 0;
 `;
@@ -36,11 +25,16 @@ const StyledTitle = styled.h2`
     margin: 0;
     padding: 1rem;
     color: ${(props) => props.theme.colors.title};
-    font-size: ${(props) => props.theme.fontSize.regular};
+    font-size: ${(props) =>
+        props.small
+            ? props.theme.fontSize.small
+            : props.theme.fontSize.regular};
 `;
 
 const StyledDescription = styled(Paragraph)`
     flex: 1;
+    font-size: ${(props) =>
+        props.small ? props.theme.fontSize.xsmall : props.theme.fontSize.small};
 `;
 
 const StyledFooter = styled.div`
@@ -49,30 +43,42 @@ const StyledFooter = styled.div`
 `;
 
 const MoreLink = styled(Button)`
-    font-size: ${(props) => props.theme.fontSize.small};
+    font-size: ${(props) =>
+        props.small ? props.theme.fontSize.xsmall : props.theme.fontSize.small};
+
+    &:hover > * {
+        border-color: ${(props) => props.theme.colors.main};
+    }
 `;
 
-const NewsCard = ({ title, imgSrc, description, content, timestamp }) => {
-    const id = Date.parse(timestamp);
+export default (props) => {
+    const { title, imgSrc, description, content } = props;
+
+    const cutText = (length, text) =>
+        text.length > length ? `${text.substring(0, length)}...` : text;
+
+    const shortTitle = title ? cutText(80, title) : title;
+    const shortDesc = description ? cutText(150, description) : description;
 
     return (
-        <StyledNewsCard>
-            <Styledimage src={imgSrc} alt={description} />
-            <StyledTitle>{title}</StyledTitle>
-            <StyledDescription>{description}</StyledDescription>
+        <StyledNewsCard {...props}>
+            <StyledImage small={props.small} src={imgSrc} alt={shortTitle} />
+            <StyledTitle small={props.small}>{shortTitle}</StyledTitle>
+            <StyledDescription small={props.small}>
+                {shortDesc}
+            </StyledDescription>
             <StyledFooter>
                 <MoreLink
+                    small={props.small}
                     link="true"
                     to={{
                         pathname: "/news",
                         state: { title, imgSrc, content },
                     }}
                 >
-                    More &gt;
+                    More <Arrow className="right" />
                 </MoreLink>
             </StyledFooter>
         </StyledNewsCard>
     );
 };
-
-export default NewsCard;

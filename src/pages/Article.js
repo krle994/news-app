@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import Container from "../components/Container";
 import Button from "../components/Button";
 import Image from "../components/Image";
+import Arrow from "../components/Arrow";
 import Title from "../components/Typography/Title";
 import Paragraph from "../components/Typography/Paragraph";
 
@@ -20,9 +21,13 @@ const StyledContent = styled(Paragraph)`
 
 const BackLink = styled(Button)`
     font-size: ${(props) => props.theme.fontSize.regular};
+
+    &:hover > * {
+        border-color: ${(props) => props.theme.colors.main};
+    }
 `;
 
-const Article = () => {
+export default () => {
     const location = useLocation();
     const history = useHistory();
     const { t } = useTranslation();
@@ -51,10 +56,8 @@ const Article = () => {
             <StyledImage src={imgSrc} alt={description} />
             <StyledContent>{content}</StyledContent>
             <BackLink onClick={() => history.goBack()}>
-                &lt; {t("back")}
+                <Arrow className="left"/> {t("back")}
             </BackLink>
         </Container>
     );
 };
-
-export default Article;

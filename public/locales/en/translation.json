@@ -3,5 +3,7 @@
     "topNewsTitle": "Top News from",
     "categories": "Categories",
     "search": "Search",
-    "back": "Back to list"
+    "back": "Back to list",
+
+    "categoriesTitle": "Top {{num}} news categories from"
 }

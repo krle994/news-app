@@ -1,12 +1,14 @@
 import fallbackSrc from "../assets/images/placeholder.png";
 
 export default (props) => {
+    let src = null;
+
     const onError = (e) => {
         e.target.onerror = null;
         e.target.src = fallbackSrc;
     };
 
-    if (!props.src) props.src = fallbackSrc;
+    src = props.src ? props.src : fallbackSrc;
 
-    return <img src={props.src} alt={props.alt} onError={onError} {...props} />;
+    return <img {...props} src={src} alt={props.alt} onError={onError} />;
 };

@@ -22,7 +22,7 @@ const StyledNavLink = styled(NavLink)`
     color: ${(props) => props.theme.colors.text};
     transition: color 0.3s ease;
     &.active,
-    &:hover {
+    &:not(.disabled):hover {
         color: ${(props) => props.theme.colors.main};
     }
 `;
@@ -58,7 +58,7 @@ const Header = () => {
     return (
         <StyledHeader>
             <div>
-                <StyledNavLink to="/">{t("Top News")}</StyledNavLink>
+                <StyledNavLink exact to="/">{t("Top News")}</StyledNavLink>
                 <StyledNavLink to="/categories">
                     {t("categories")}
                 </StyledNavLink>
