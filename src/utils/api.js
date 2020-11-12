@@ -1,6 +1,6 @@
 import axios from "../config/axios";
 
-async function fetchArticles(code = "gb", category, term, pageSize) {
+async function fetchArticles(code = "gb", category, term, pageSize = 30) {
     const res = await axios.get("/top-headlines", {
         params: {
             country: code,

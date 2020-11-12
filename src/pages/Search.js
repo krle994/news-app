@@ -37,7 +37,9 @@ const SearchInput = styled.input`
 
 export default () => {
     const { t } = useTranslation();
-    const { name, code } = useSelector((state) => state.country.selectedCountry);
+    const { name, code } = useSelector(
+        (state) => state.country.selectedCountry
+    );
     const [term, setTerm] = useState("");
     const [loading, setLoading] = useState(false);
     const [debouncedTerm, setDebouncedTerm] = useState(term);
@@ -57,14 +59,16 @@ export default () => {
 
     useEffect(() => {
         const search = async () => {
-            setLoading(true);
-            const res = await fetchArticles(code, null, debouncedTerm);
+            if (debouncedTerm) {
+                setLoading(true);
+                const res = await fetchArticles(code, null, debouncedTerm);
 
-            if(res.status === 'ok') {
-                setLoading(false);
-                setArticles(res.articles);
-            } else {
-                setLoading(false);
+                if (res.status === "ok") {
+                    setLoading(false);
+                    setArticles(res.articles);
+                } else {
+                    setLoading(false);
+                }
             }
         };
 
@@ -72,6 +76,9 @@ export default () => {
     }, [debouncedTerm, code]);
 
     const renderSearchResults = () => {
+
+        if (loading) return <Spinner />
+
         return articles.length ? (
             <GridLayout>
                 {articles.map((article) => (
@@ -84,9 +91,7 @@ export default () => {
                     />
                 ))}
             </GridLayout>
-        ) : (
-            <Spinner />
-        );
+        ) : null;
     };
 
     return (
@@ -98,7 +103,7 @@ export default () => {
                     onChange={(e) => setTerm(e.target.value)}
                 />
             </InputWrapper>
-            { renderSearchResults() }
+            {renderSearchResults()}
         </Container>
     );
 };
