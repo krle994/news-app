@@ -5,5 +5,7 @@
     "search": "Search",
     "back": "Back to list",
 
-    "categoriesTitle": "Top {{num}} news categories from"
+    "categoriesTitle": "Top {{num}} news categories from",
+
+    "searchTitle": "Search top news from {{country}} by term:"
 }

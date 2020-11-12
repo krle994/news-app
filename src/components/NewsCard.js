@@ -9,6 +9,7 @@ const StyledNewsCard = styled.div`
     display: flex;
     flex-direction: column;
     width: 100%;
+    max-width: 390px;
     height: 100%;
     background: white;
     border-radius: 8px;

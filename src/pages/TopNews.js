@@ -8,14 +8,9 @@ import Container from "../components/Container";
 import NewsCard from "../components/NewsCard";
 import Spinner from "../components/Spinner";
 import Title from "../components/Typography/Title";
+import GridLayout from "../components/GridLayout";
 
 import { getArticles } from "../store/actions/news";
-
-const TopNewsWrapper = styled.div`
-    display: grid;
-    grid-gap: 1.5rem;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-`;
 
 const StyledNewsCard = styled(NewsCard)`
     transition: box-shadow 0.3s ease;
@@ -44,17 +39,21 @@ export default () => {
     }, [country]);
 
     const renderArticles = () => {
-        return articles.length
-            ? articles.map((article) => (
-                  <StyledNewsCard
-                      key={uuid()}
-                      title={article.title}
-                      imgSrc={article.urlToImage}
-                      description={article.description}
-                      content={article.content}
-                  />
-              ))
-            : <Spinner />;
+        return articles.length ? (
+            <GridLayout>
+                {articles.map((article) => (
+                    <StyledNewsCard
+                        key={uuid()}
+                        title={article.title}
+                        imgSrc={article.urlToImage}
+                        description={article.description}
+                        content={article.content}
+                    />
+                ))}
+            </GridLayout>
+        ) : (
+            <Spinner />
+        );
     };
 
     return (
@@ -62,7 +61,7 @@ export default () => {
             <Title>
                 {t("topNewsTitle")} {country}
             </Title>
-            <TopNewsWrapper>{renderArticles()}</TopNewsWrapper>
+            {renderArticles()}
         </Container>
     );
 };
