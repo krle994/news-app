@@ -65,8 +65,8 @@ export default () => {
     search();
   }, [debouncedTerm, code]);
 
-  const renderSearchResults = () => {
-    return articles && articles.length ? (
+  const renderSearchResults = () =>
+    articles && articles.length ? (
       <GridLayout>
         {articles.map(({ title, urlToImage, description, content }) => (
           <NewsCard
@@ -81,7 +81,6 @@ export default () => {
     ) : (
       <Spinner />
     );
-  };
 
   return (
     <Container>

@@ -50,8 +50,8 @@ export default () => {
     return `${t("topNewsTitle")} ${name}`;
   };
 
-  const renderArticles = () => {
-    return articles.length ? (
+  const renderArticles = () =>
+    articles.length ? (
       <GridLayout>
         {articles.map(({ title, urlToImage, description, content }) => (
           <StyledNewsCard
@@ -66,7 +66,6 @@ export default () => {
     ) : (
       <Spinner />
     );
-  };
 
   return (
     <Container>

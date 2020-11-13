@@ -17,6 +17,11 @@ You will also see any lint errors in the console.
 
 Runs the stories for the project on port 6006
 
+### `yarn lint`
+
+Runs the eslint linter and checks for problems. <br />
+Run with ```--fix``` flag to cleanup code.
+
 ### `yarn build`
 
 Builds the app for production to the `build` folder.<br />

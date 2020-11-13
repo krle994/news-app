@@ -27,10 +27,10 @@ const CategoriesWrapper = styled.div`
 
 export default () => {
   const { t } = useTranslation();
-  const { code, name } = useSelector(({ country }) => country.selectedCountry);
+  const { code } = useSelector(({ country }) => country.selectedCountry);
 
-  const renderCategorties = () => {
-    return categories.length ? (
+  const renderCategorties = () =>
+    categories.length ? (
       categories.map((category) => {
         const title = category.charAt(0).toUpperCase() + category.slice(1);
         return (
@@ -50,7 +50,6 @@ export default () => {
     ) : (
       <Spinner />
     );
-  };
 
   return (
     <StyledContainer>

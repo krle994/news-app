@@ -40,11 +40,14 @@ const Header = () => {
   const isArticlePage = location.pathname === "/news";
 
   const getActiveClass = (code) => {
-    return isArticlePage
-      ? "disabled"
-      : selectedCountry.code === code
-      ? "active"
-      : "";
+    if (isArticlePage) {
+      return "disabled";
+    }
+    if (selectedCountry.code === code) {
+      return "active";
+    }
+
+    return "";
   };
 
   const handleCountryChange = (country) => {
@@ -64,17 +67,15 @@ const Header = () => {
       </div>
       <div>
         {countries.length
-          ? countries.map((country) => {
-              return (
-                <CountryButton
-                  className={getActiveClass(country.code)}
-                  key={country.code}
-                  onClick={() => handleCountryChange(country)}
-                >
-                  {country.code}
-                </CountryButton>
-              );
-            })
+          ? countries.map((country) => (
+              <CountryButton
+                className={getActiveClass(country.code)}
+                key={country.code}
+                onClick={() => handleCountryChange(country)}
+              >
+                {country.code}
+              </CountryButton>
+            ))
           : null}
       </div>
     </StyledHeader>
