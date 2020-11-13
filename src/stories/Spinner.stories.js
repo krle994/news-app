@@ -1,9 +1,9 @@
-import React from "react";
+import React from 'react';
 
-import Spinner from "../components/ui/Spinner";
+import Spinner from '../components/ui/Spinner';
 
 export default {
-  title: "Spinner",
+  title: 'Spinner',
   component: Spinner,
 };
 

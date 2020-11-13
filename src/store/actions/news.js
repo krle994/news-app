@@ -2,8 +2,8 @@ import {
   GET_TOP_ARTICLES,
   GET_SEARCH_ARTICLES,
   GET_CATEGORY_ARTICLES,
-} from "../actionTypes";
-import api from "../../utils/api";
+} from '../actionTypes';
+import api from '../../utils/api';
 
 const { fetchArticles } = api;
 

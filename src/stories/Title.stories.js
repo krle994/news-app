@@ -1,9 +1,9 @@
-import React from "react";
+import React from 'react';
 
-import Title from "../components/Typography/Title";
+import Title from '../components/Typography/Title';
 
 export default {
-  title: "Title",
+  title: 'Title',
   component: Title,
 };
 

@@ -1,13 +1,13 @@
-import React, { useState, useRef } from "react";
-import styled from "styled-components";
-import { useSelector, useDispatch } from "react-redux";
-import Carousel from "./Carousel";
-import Spinner from "./Spinner";
+import React, { useState, useRef } from 'react';
+import styled from 'styled-components';
+import { useSelector, useDispatch } from 'react-redux';
+import Carousel from './Carousel';
+import Spinner from './Spinner';
 
-import { getCategoryArticles } from "../../store/actions/news";
+import { getCategoryArticles } from '../../store/actions/news';
 
-import Button from "./Button";
-import Arrow from "../icons/Arrow";
+import Button from './Button';
+import Arrow from '../icons/Arrow';
 
 const AccordionWrapper = styled.div`
   display: flex;
@@ -38,8 +38,8 @@ const StyledArrow = styled(Arrow)`
 
 export default ({ to, title, category }) => {
   const [active, setActive] = useState(false);
-  const [height, setHeight] = useState("0px");
-  const [rotate, setRotate] = useState("down");
+  const [height, setHeight] = useState('0px');
+  const [rotate, setRotate] = useState('down');
 
   const dispatch = useDispatch();
   const articles = useSelector(({ news }) => news.categoryArticles);
@@ -48,8 +48,8 @@ export default ({ to, title, category }) => {
 
   function toggleAccordion() {
     setActive(!active);
-    setHeight(active ? "0px" : "350px");
-    setRotate(active ? "down" : "up");
+    setHeight(active ? '0px' : '350px');
+    setRotate(active ? 'down' : 'up');
 
     if (articles[category].length <= 0) {
       dispatch(getCategoryArticles(category));

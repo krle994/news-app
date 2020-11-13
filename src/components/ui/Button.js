@@ -1,5 +1,5 @@
-import styled, { css } from "styled-components";
-import { Link } from "react-router-dom";
+import styled, { css } from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const sharedCss = css`
   background: none;
@@ -23,5 +23,4 @@ const StyledLink = styled(Link)`
   ${sharedCss}
 `;
 
-export default (props) =>
-  props.link ? <StyledLink {...props} /> : <StyledButton {...props} />;
+export default (props) => (props.link ? <StyledLink {...props} /> : <StyledButton {...props} />);

@@ -1,4 +1,4 @@
-import fallbackSrc from "../../assets/images/placeholder.png";
+import fallbackSrc from '../../assets/images/placeholder.png';
 
 export default (props) => {
   let src = null;

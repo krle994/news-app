@@ -1,17 +1,17 @@
-import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { useTranslation } from "react-i18next";
-import { useLocation } from "react-router-dom";
-import styled from "styled-components";
-import { v4 as uuid } from "uuid";
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
+import { useLocation } from 'react-router-dom';
+import styled from 'styled-components';
+import { v4 as uuid } from 'uuid';
 
-import Container from "../components/layout/Container";
-import NewsCard from "../components/NewsCard";
-import Spinner from "../components/ui/Spinner";
-import Title from "../components/Typography/Title";
-import GridLayout from "../components/layout/GridLayout";
+import Container from '../components/layout/Container';
+import NewsCard from '../components/NewsCard';
+import Spinner from '../components/ui/Spinner';
+import Title from '../components/Typography/Title';
+import GridLayout from '../components/layout/GridLayout';
 
-import { getTopArticles } from "../store/actions/news";
+import { getTopArticles } from '../store/actions/news';
 
 const StyledNewsCard = styled(NewsCard)`
   transition: box-shadow 0.3s ease;
@@ -44,28 +44,29 @@ export default () => {
 
   const getTitle = () => {
     if (category) {
-      return `${t("topCategoryTitle", { category, country: name })}`;
+      return `${t('topCategoryTitle', { category, country: name })}`;
     }
 
-    return `${t("topNewsTitle")} ${name}`;
+    return `${t('topNewsTitle')} ${name}`;
   };
 
-  const renderArticles = () =>
-    articles.length ? (
-      <GridLayout>
-        {articles.map(({ title, urlToImage, description, content }) => (
-          <StyledNewsCard
-            key={uuid()}
-            title={title}
-            imgSrc={urlToImage}
-            description={description}
-            content={content}
-          />
-        ))}
-      </GridLayout>
-    ) : (
-      <Spinner />
-    );
+  const renderArticles = () => (articles.length ? (
+    <GridLayout>
+      {articles.map(({
+        title, urlToImage, description, content,
+      }) => (
+        <StyledNewsCard
+          key={uuid()}
+          title={title}
+          imgSrc={urlToImage}
+          description={description}
+          content={content}
+        />
+      ))}
+    </GridLayout>
+  ) : (
+    <Spinner />
+  ));
 
   return (
     <Container>

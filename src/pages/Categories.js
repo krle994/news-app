@@ -1,20 +1,20 @@
-import styled from "styled-components";
-import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
+import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 
-import Container from "../components/layout/Container";
-import Accordion from "../components/ui/Accordion";
-import Title from "../components/Typography/Title";
-import Spinner from "../components/ui/Spinner";
+import Container from '../components/layout/Container';
+import Accordion from '../components/ui/Accordion';
+import Title from '../components/Typography/Title';
+import Spinner from '../components/ui/Spinner';
 
 const categories = [
-  "business",
-  "entertainment",
-  "general",
-  "health",
-  "science",
-  "sports",
-  "technology",
+  'business',
+  'entertainment',
+  'general',
+  'health',
+  'science',
+  'sports',
+  'technology',
 ];
 
 const StyledContainer = styled(Container)`
@@ -29,32 +29,33 @@ export default () => {
   const { t } = useTranslation();
   const { code } = useSelector(({ country }) => country.selectedCountry);
 
-  const renderCategorties = () =>
-    categories.length ? (
-      categories.map((category) => {
-        const title = category.charAt(0).toUpperCase() + category.slice(1);
-        return (
-          <Accordion
-            key={category}
-            category={category}
-            title={title}
-            to={{
-              pathname: "/",
-              state: {
-                category,
-              },
-            }}
-          />
-        );
-      })
-    ) : (
-      <Spinner />
-    );
+  const renderCategorties = () => (categories.length ? (
+    categories.map((category) => {
+      const title = category.charAt(0).toUpperCase() + category.slice(1);
+      return (
+        <Accordion
+          key={category}
+          category={category}
+          title={title}
+          to={{
+            pathname: '/',
+            state: {
+              category,
+            },
+          }}
+        />
+      );
+    })
+  ) : (
+    <Spinner />
+  ));
 
   return (
     <StyledContainer>
       <Title>
-        {t("categoriesTitle", { num: categories.length })} {code}
+        {t('categoriesTitle', { num: categories.length })}
+        {' '}
+        {code}
       </Title>
       <CategoriesWrapper>{renderCategorties()}</CategoriesWrapper>
     </StyledContainer>

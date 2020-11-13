@@ -1,13 +1,13 @@
-import React from "react";
-import { HashRouter as Router, Switch, Route } from "react-router-dom";
-import styled from "styled-components";
+import React from 'react';
+import { HashRouter as Router, Switch, Route } from 'react-router-dom';
+import styled from 'styled-components';
 
-import Header from "./components/Header";
+import Header from './components/Header';
 
-import TopNews from "./pages/TopNews";
-import Categories from "./pages/Categories";
-import Search from "./pages/Search";
-import Article from "./pages/Article";
+import TopNews from './pages/TopNews';
+import Categories from './pages/Categories';
+import Search from './pages/Search';
+import Article from './pages/Article';
 
 const Layout = styled.div`
   display: grid;

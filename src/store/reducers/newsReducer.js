@@ -2,7 +2,7 @@ import {
   GET_TOP_ARTICLES,
   GET_SEARCH_ARTICLES,
   GET_CATEGORY_ARTICLES,
-} from "../actionTypes";
+} from '../actionTypes';
 
 const initialState = {
   topArticles: [],
@@ -20,28 +20,28 @@ const initialState = {
 
 export default (state = initialState, { type, payload }) => {
   switch (type) {
-    case GET_TOP_ARTICLES:
-      return {
-        ...state,
-        topArticles: payload,
-      };
+  case GET_TOP_ARTICLES:
+    return {
+      ...state,
+      topArticles: payload,
+    };
 
-    case GET_SEARCH_ARTICLES:
-      return {
-        ...state,
-        searchArticles: payload,
-      };
+  case GET_SEARCH_ARTICLES:
+    return {
+      ...state,
+      searchArticles: payload,
+    };
 
-    case GET_CATEGORY_ARTICLES:
-      return {
-        ...state,
-        categoryArticles: {
-          ...state.categoryArticles,
-          [payload.category]: payload.response,
-        },
-      };
+  case GET_CATEGORY_ARTICLES:
+    return {
+      ...state,
+      categoryArticles: {
+        ...state.categoryArticles,
+        [payload.category]: payload.response,
+      },
+    };
 
-    default:
-      return state;
+  default:
+    return state;
   }
 };

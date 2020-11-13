@@ -1,9 +1,9 @@
-import React from "react";
+import React from 'react';
 
-import Paragraph from "../components/Typography/Paragraph";
+import Paragraph from '../components/Typography/Paragraph';
 
 export default {
-  title: "Paragraph",
+  title: 'Paragraph',
   component: Paragraph,
 };
 

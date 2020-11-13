@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from "react";
-import { useTranslation } from "react-i18next";
-import { useSelector, useDispatch } from "react-redux";
-import { v4 as uuid } from "uuid";
-import styled from "styled-components";
+import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useSelector, useDispatch } from 'react-redux';
+import { v4 as uuid } from 'uuid';
+import styled from 'styled-components';
 
-import Container from "../components/layout/Container";
-import Title from "../components/Typography/Title";
-import GridLayout from "../components/layout/GridLayout";
-import NewsCard from "../components/NewsCard";
+import Container from '../components/layout/Container';
+import Title from '../components/Typography/Title';
+import GridLayout from '../components/layout/GridLayout';
+import NewsCard from '../components/NewsCard';
 
-import { getSearchArticles } from "../store/actions/news";
+import { getSearchArticles } from '../store/actions/news';
 
 const InputWrapper = styled.div`
   padding: 2rem;
@@ -35,7 +35,7 @@ const SearchInput = styled.input`
 `;
 
 export default () => {
-  const [term, setTerm] = useState("");
+  const [term, setTerm] = useState('');
   const [debouncedTerm, setDebouncedTerm] = useState(term);
 
   const dispatch = useDispatch();
@@ -64,24 +64,25 @@ export default () => {
     search();
   }, [debouncedTerm, code]);
 
-  const renderSearchResults = () =>
-    articles && articles.length ? (
-      <GridLayout>
-        {articles.map(({ title, urlToImage, description, content }) => (
-          <NewsCard
-            key={uuid()}
-            title={title}
-            imgSrc={urlToImage}
-            description={description}
-            content={content}
-          />
-        ))}
-      </GridLayout>
-    ) : null;
+  const renderSearchResults = () => (articles && articles.length ? (
+    <GridLayout>
+      {articles.map(({
+        title, urlToImage, description, content,
+      }) => (
+        <NewsCard
+          key={uuid()}
+          title={title}
+          imgSrc={urlToImage}
+          description={description}
+          content={content}
+        />
+      ))}
+    </GridLayout>
+  ) : null);
 
   return (
     <Container>
-      <Title>{t("searchTitle", { country: name })}</Title>
+      <Title>{t('searchTitle', { country: name })}</Title>
       <InputWrapper>
         <SearchInput value={term} onChange={(e) => setTerm(e.target.value)} />
       </InputWrapper>

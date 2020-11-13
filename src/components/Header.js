@@ -1,11 +1,11 @@
-import styled from "styled-components";
-import { useTranslation } from "react-i18next";
-import { useSelector, useDispatch } from "react-redux";
-import { NavLink, useLocation } from "react-router-dom";
+import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
+import { useSelector, useDispatch } from 'react-redux';
+import { NavLink, useLocation } from 'react-router-dom';
 
-import { setSelectedCountry } from "../store/actions/country";
+import { setSelectedCountry } from '../store/actions/country';
 
-import Button from "./ui/Button";
+import Button from './ui/Button';
 
 const StyledHeader = styled.nav`
   display: flex;
@@ -37,17 +37,17 @@ const Header = () => {
   const selectedCountry = useSelector((state) => state.country.selectedCountry);
   const countries = useSelector((state) => state.country.countries);
   const location = useLocation();
-  const isArticlePage = location.pathname === "/news";
+  const isArticlePage = location.pathname === '/news';
 
   const getActiveClass = (code) => {
     if (isArticlePage) {
-      return "disabled";
+      return 'disabled';
     }
     if (selectedCountry.code === code) {
-      return "active";
+      return 'active';
     }
 
-    return "";
+    return '';
   };
 
   const handleCountryChange = (country) => {
@@ -60,22 +60,22 @@ const Header = () => {
     <StyledHeader>
       <div>
         <StyledNavLink exact to="/">
-          {t("Top News")}
+          {t('Top News')}
         </StyledNavLink>
-        <StyledNavLink to="/categories">{t("categories")}</StyledNavLink>
-        <StyledNavLink to="/search">{t("search")}</StyledNavLink>
+        <StyledNavLink to="/categories">{t('categories')}</StyledNavLink>
+        <StyledNavLink to="/search">{t('search')}</StyledNavLink>
       </div>
       <div>
         {countries.length
           ? countries.map((country) => (
-              <CountryButton
-                className={getActiveClass(country.code)}
-                key={country.code}
-                onClick={() => handleCountryChange(country)}
-              >
-                {country.code}
-              </CountryButton>
-            ))
+            <CountryButton
+              className={getActiveClass(country.code)}
+              key={country.code}
+              onClick={() => handleCountryChange(country)}
+            >
+              {country.code}
+            </CountryButton>
+          ))
           : null}
       </div>
     </StyledHeader>

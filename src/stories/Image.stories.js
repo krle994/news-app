@@ -1,9 +1,9 @@
-import React from "react";
+import React from 'react';
 
-import Image from "../components/ui/Image";
+import Image from '../components/ui/Image';
 
 export default {
-  title: "Image",
+  title: 'Image',
   component: Image,
 };
 
