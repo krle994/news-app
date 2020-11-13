@@ -8,7 +8,6 @@ import Container from "../components/layout/Container";
 import Title from "../components/Typography/Title";
 import GridLayout from "../components/layout/GridLayout";
 import NewsCard from "../components/NewsCard";
-import Spinner from "../components/ui/Spinner";
 
 import { getSearchArticles } from "../store/actions/news";
 
@@ -78,9 +77,7 @@ export default () => {
           />
         ))}
       </GridLayout>
-    ) : (
-      <Spinner />
-    );
+    ) : null;
 
   return (
     <Container>
