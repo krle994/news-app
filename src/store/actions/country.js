@@ -1,11 +1,11 @@
-import { SET_COUNTRY } from "../actionTypes";
+import { SET_SELECTED_COUNTRY } from "../actionTypes";
 
-export const setSelectedCountry = ({ code, name}) => (dispatch) => {
-    dispatch({
-        type: SET_COUNTRY,
-        payload: {
-            code,
-            name
-        },
-    });
+export const setSelectedCountry = ({ code, name }) => (dispatch) => {
+  dispatch({
+    type: SET_SELECTED_COUNTRY,
+    payload: {
+      code,
+      name,
+    },
+  });
 };
