@@ -1,8 +1,11 @@
 # News App - HTEC test
 
-To start, clone or download the repository from: <br /> [https://github.com/krle994/news-app](https://github.com/krle994/news-app)
+To start, clone or download the repository from: <br /> ```https://github.com/krle994/news-app.git```
+<br /> 
 <br /> 
 Then, run ``yarn && yarn start``
+<br /> 
+<br /> 
 In the project directory, you can run:
 
 ### `yarn start`
