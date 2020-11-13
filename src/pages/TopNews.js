@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
+import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { v4 as uuid } from "uuid";
 
@@ -28,14 +29,26 @@ const StyledNewsCard = styled(NewsCard)`
 `;
 
 export default () => {
-  const country = useSelector(({ country }) => country.selectedCountry.name);
+  const { name, code } = useSelector(({ country }) => country.selectedCountry);
   const articles = useSelector(({ news }) => news.topArticles);
+
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const location = useLocation();
+
+  const category = location.state ? location.state.category : null;
 
   useEffect(() => {
-    dispatch(getTopArticles());
-  }, [country]);
+    dispatch(getTopArticles(category));
+  }, [code]);
+
+  const getTitle = () => {
+    if (category) {
+      return `${t("topCategoryTitle", { category, country: name })}`;
+    }
+
+    return `${t("topNewsTitle")} ${name}`;
+  };
 
   const renderArticles = () => {
     return articles.length ? (
@@ -57,9 +70,7 @@ export default () => {
 
   return (
     <Container>
-      <Title>
-        {t("topNewsTitle")} {country}
-      </Title>
+      <Title>{getTitle()}</Title>
       {renderArticles()}
     </Container>
   );

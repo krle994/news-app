@@ -7,11 +7,11 @@ import api from "../../utils/api";
 
 const { fetchArticles } = api;
 
-export const getTopArticles = () => async (dispatch, getState) => {
+export const getTopArticles = (category) => async (dispatch, getState) => {
   const code = getState().country.selectedCountry.code;
 
   try {
-    const { articles } = await fetchArticles(code);
+    const { articles } = await fetchArticles(code, category);
 
     if (articles && articles.length) {
       dispatch({

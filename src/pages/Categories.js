@@ -41,7 +41,6 @@ export default () => {
             to={{
               pathname: "/",
               state: {
-                title: t("topCategoryNews", { name, category }),
                 category,
               },
             }}
