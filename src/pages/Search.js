@@ -1,109 +1,95 @@
 import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { v4 as uuid } from "uuid";
 import styled from "styled-components";
 
-import Container from "../components/Container";
+import Container from "../components/layout/Container";
 import Title from "../components/Typography/Title";
-import GridLayout from "../components/GridLayout";
+import GridLayout from "../components/layout/GridLayout";
 import NewsCard from "../components/NewsCard";
-import Spinner from "../components/Spinner";
+import Spinner from "../components/ui/Spinner";
 
-import api from "../utils/api";
+import { getSearchArticles } from "../store/actions/news";
 
 const InputWrapper = styled.div`
-    padding: 2rem;
+  padding: 2rem;
 `;
 
 const SearchInput = styled.input`
-    display: block;
-    width: 100%;
-    max-width: 400px;
-    height: 40px;
-    margin: auto;
-    padding: 10px;
-    font-size: 30px;
-    border: 2px solid #d0d0d0;
-    border-radius: 40px;
-    outline: 0;
-    transition: border-color 0.3s ease;
+  display: block;
+  width: 100%;
+  max-width: 400px;
+  height: 40px;
+  margin: auto;
+  padding: 10px;
+  font-size: 30px;
+  border: 2px solid #d0d0d0;
+  border-radius: 40px;
+  outline: 0;
+  transition: border-color 0.3s ease;
 
-    &:hover,
-    &:focus {
-        border-color: #333;
-    }
+  &:hover,
+  &:focus {
+    border-color: #333;
+  }
 `;
 
 export default () => {
-    const { t } = useTranslation();
-    const { name, code } = useSelector(
-        (state) => state.country.selectedCountry
-    );
-    const [term, setTerm] = useState("");
-    const [loading, setLoading] = useState(false);
-    const [debouncedTerm, setDebouncedTerm] = useState(term);
-    const [articles, setArticles] = useState([]);
+  const [term, setTerm] = useState("");
+  const [debouncedTerm, setDebouncedTerm] = useState(term);
 
-    const { fetchArticles } = api;
+  const dispatch = useDispatch();
+  const { t } = useTranslation();
 
-    useEffect(() => {
-        const timeoutid = setTimeout(() => {
-            setDebouncedTerm(term);
-        }, 500);
+  const articles = useSelector(({ news }) => news.searchArticles);
+  const { name, code } = useSelector(({ country }) => country.selectedCountry);
 
-        return () => {
-            clearTimeout(timeoutid);
-        };
-    }, [term]);
+  useEffect(() => {
+    const timeoutid = setTimeout(() => {
+      setDebouncedTerm(term);
+    }, 500);
 
-    useEffect(() => {
-        const search = async () => {
-            if (debouncedTerm) {
-                setLoading(true);
-                const res = await fetchArticles(code, null, debouncedTerm);
+    return () => {
+      clearTimeout(timeoutid);
+    };
+  }, [term]);
 
-                if (res.status === "ok") {
-                    setLoading(false);
-                    setArticles(res.articles);
-                } else {
-                    setLoading(false);
-                }
-            }
-        };
-
-        search();
-    }, [debouncedTerm, code]);
-
-    const renderSearchResults = () => {
-
-        if (loading) return <Spinner />
-
-        return articles.length ? (
-            <GridLayout>
-                {articles.map((article) => (
-                    <NewsCard
-                        key={uuid()}
-                        title={article.title}
-                        imgSrc={article.urlToImage}
-                        description={article.description}
-                        content={article.content}
-                    />
-                ))}
-            </GridLayout>
-        ) : null;
+  useEffect(() => {
+    const search = async () => {
+      if (debouncedTerm) {
+        dispatch(getSearchArticles(debouncedTerm));
+      }
     };
 
-    return (
-        <Container>
-            <Title>{t("searchTitle", { country: name })}</Title>
-            <InputWrapper>
-                <SearchInput
-                    value={term}
-                    onChange={(e) => setTerm(e.target.value)}
-                />
-            </InputWrapper>
-            {renderSearchResults()}
-        </Container>
+    search();
+  }, [debouncedTerm, code]);
+
+  const renderSearchResults = () => {
+    return articles && articles.length ? (
+      <GridLayout>
+        {articles.map(({ title, urlToImage, description, content }) => (
+          <NewsCard
+            key={uuid()}
+            title={title}
+            imgSrc={urlToImage}
+            description={description}
+            content={content}
+          />
+        ))}
+      </GridLayout>
+    ) : (
+      <Spinner />
     );
+  };
+
+  return (
+    <Container>
+      <Title>{t("searchTitle", { country: name })}</Title>
+      <InputWrapper>
+        <SearchInput value={term} onChange={(e) => setTerm(e.target.value)} />
+      </InputWrapper>
+      {renderSearchResults()}
+    </Container>
+  );
 };

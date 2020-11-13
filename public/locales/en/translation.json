@@ -1,6 +1,7 @@
 {
     "topNews": "Top News",
     "topNewsTitle": "Top News from",
+    "topCategoryNews": "Top {{category}} news from {{name}}",
     "categories": "Categories",
     "search": "Search",
     "back": "Back to list",

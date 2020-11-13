@@ -4,19 +4,19 @@ import { Provider } from "react-redux";
 import { ThemeProvider } from "styled-components";
 
 import "./index.css";
-import theme from './theme/theme';
+import theme from "./theme/theme";
 import App from "./App";
 import store from "./store";
 
-import './i18n';
+import "./i18n";
 
 ReactDOM.render(
-    <React.StrictMode>
-        <Provider store={store}>
-            <ThemeProvider theme={theme}>
-                <App />
-            </ThemeProvider>
-        </Provider>
-    </React.StrictMode>,
-    document.getElementById("root")
+  <React.StrictMode>
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <App />
+      </ThemeProvider>
+    </Provider>
+  </React.StrictMode>,
+  document.getElementById("root")
 );
