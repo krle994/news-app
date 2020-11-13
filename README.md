@@ -23,7 +23,9 @@ Runs the stories for the project on port 6006
 ### `yarn lint`
 
 Runs the eslint linter and checks for problems. <br />
-Run with ```--fix``` flag to cleanup code.
+Run with ```--fix``` flag to cleanup code.<br />
+<br />
+The repo also has ```husky``` installed for pre-hooks with git to run lint before pushing
 
 ### `yarn build`
 
